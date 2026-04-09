@@ -8,7 +8,6 @@ CREATE TABLE customer (
     account_type ENUM('savings', 'current'),
     account_balance DECIMAL(10 , 2 ) DEFAULT 0
 );
-
 CREATE TABLE transactions (
     transaction_id INT AUTO_INCREMENT PRIMARY KEY,
     customer_id INT,
@@ -19,10 +18,9 @@ CREATE TABLE transactions (
     FOREIGN KEY (customer_id)
         REFERENCES customer (customer_id)
 );
-
 insert into customer(name,email,city,account_type,account_balance)values
 
-('Amit Sharma', 'amit.sharma@gmail.com', 'Delhi', 'Savings', 5000.00),
+('Amit Sharma', 'amit@gmail.com', 'Delhi', 'Savings', 5000.00),
 ('Priya Reddy', 'priya.reddy@gmail.com', 'Hyderabad', 'Current', 12000.50),
 ('Rahul Verma', 'rahul.verma@gmail.com', 'Mumbai', 'Savings', 8000.75),
 ('Sneha Iyer', 'sneha.iyer@gmail.com', 'Chennai', 'Savings', 6500.00),
@@ -62,7 +60,6 @@ SELECT DISTINCT
     transaction_mode
 FROM
     transactions;
-
 SELECT 
     *
 FROM
@@ -82,6 +79,14 @@ SELECT
 FROM
     transactions
 GROUP BY customer_id;
+
+
+SELECT c.customer_id, c.name, SUM(t.amount) AS total_transaction
+FROM customer c
+JOIN transactions t 
+ON c.customer_id = t.customer_id
+GROUP BY c.customer_id, c.name
+HAVING SUM(t.amount) > 100;
 
 SELECT 
     c.name, t.amount, t.transaction_type
