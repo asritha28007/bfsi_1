@@ -111,6 +111,4 @@ This project demonstrates how SQL can be used for:
 * Data analysis
 * Real-world banking insights
 
----
 
-✨ Simple but powerful SQL project for beginners.
